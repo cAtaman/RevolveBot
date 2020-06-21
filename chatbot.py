@@ -5,6 +5,8 @@ revolve_bot = ChatBot(name='RevolveBot', read_only=True,
                       logic_adapters=['chatterbot.logic.MathematicalEvaluation', 'chatterbot.logic.BestMatch'])
                       
 small_talk = [
+               'Hi',
+               'Hello',
                'How are you?'
                'How are you doing?'
                'What’s up?'
@@ -19,3 +21,8 @@ small_talk = [
                'Happy birthday!',
                'I have a question',
               ]
+small_talk_trainer = ListTrainer(revolve_bot)    
+for item in (small_talk,):
+    small_talk_trainer.train(item)
+    
+              
