@@ -1,15 +1,19 @@
-import sys
-from chatbot import revolve_bot
+from flask import request, jsonify, render_template
+from config import revolve_bot, app
+
+
+@app.route('/chat', methods=['GET'])
+def chat():
+    message = request.args['msg']
+    resp = revolve_bot.get_response(message)
+    return jsonify({'reply': resp.text, 'time': resp.created_at}), 200
+
+
+@app.route('/revolvebot', methods=['GET'])
+def get_bot_playground():
+    return render_template('playground.html')
 
 
 if __name__ == '__main__':
-    try:
-        chat = sys.argv[1:]
-    except:
-        print('Ask a question like so:  "python revolve Hi"')
-        sys.exit()
-        
-    chat = ' '.join(chat)
-    resp = revolve_bot.get_response(chat)
-    print(resp)
-    
+    app.run(debug=True, port=3310)
+
