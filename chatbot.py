@@ -1,33 +1,43 @@
 import sys
 from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ListTrainer, ChatterBotCorpusTrainer
 
-revolve_bot = ChatBot(name='RevolveBot', read_only=True,
-                      logic_adapters=['chatterbot.logic.MathematicalEvaluation', 'chatterbot.logic.BestMatch'])
-def train():                      
+
+def create_bot():
+    return ChatBot(name='RevolveBot', read_only=True,
+                   logic_adapters=['chatterbot.logic.MathematicalEvaluation', 'chatterbot.logic.BestMatch'])
+
+
+def train(bot):                      
     small_talk = [
-                   'Hi',
-                   'Hello',
-                   'How are you?'
-                   'How are you doing?'
-                   'What’s up?'
-                   'Good day',
-                   'Tell me something',
-                   'I’ll do that now',
-                   'Hello',
-                   'Thank you',
-                   'Goodbye',
-                   'How can you help me?',
-                   'Hi, my name is RevolveBot',
-                   'Happy birthday!',
-                   'I have a question',
+                    'hi there!',
+                    'hi!',
+                    'how do you do?',
+                    'how are you?',
+                    'i\'m cool.',
+                    'fine, you?',
+                    'always cool.',
+                    'i\'m ok',
+                    'glad to hear that.',
+                    'i\'m fine',
+                    'glad to hear that.',
+                    'i feel awesome',
+                    'excellent, glad to hear that.',
+                    'not so good',
+                    'sorry to hear that.',
+                    'Thank you',
+                    'Goodbye',
+                    'what\'s your name?',
+                    'I\'m RevolveBot. ask me any question',
+                    'I love ...',
+                    'I love her too!'                    
                   ]
-    small_talk_trainer = ListTrainer(revolve_bot)    
+    small_talk_trainer = ListTrainer(bot)    
     for item in (small_talk,):
         small_talk_trainer.train(item)
-        
-if __name__ == '__main__':
-    command = sys.argv[1]
-    if command == 'train':
-        train()
-              
+
+
+def serious_train(bot):
+    corpus_trainer = ChatterBotCorpusTrainer(bot)
+    corpus_trainer.train('chatterbot.corpus.english')
+
