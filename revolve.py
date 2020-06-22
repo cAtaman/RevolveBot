@@ -1,12 +1,17 @@
+from datetime import datetime
 from flask import request, jsonify, render_template
 from config import revolve_bot, app
+from termcolor import colored
 
 
-@app.route('/chat', methods=['GET'])
+@app.route('/chat', methods=['GET', 'POST'])
 def chat():
-    message = request.args['msg']
+    message = request.form['msg']
+    message = message if message else 'Hi'
     resp = revolve_bot.get_response(message)
-    return jsonify({'reply': resp.text, 'time': resp.created_at}), 200
+    print('user_x: ', message)
+    print(colored('RevolveBot: ' + resp.text, 'green'))
+    return jsonify({'reply': resp.text, 'time': datetime.timestamp(resp.created_at)}), 200
 
 
 @app.route('/revolvebot', methods=['GET'])
