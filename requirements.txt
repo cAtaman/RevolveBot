@@ -1,3 +1,5 @@
 flask
+termcolor
+colorama
 chatterbot
 chatterbot_corpus

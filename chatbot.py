@@ -4,7 +4,7 @@ from chatterbot.trainers import ListTrainer, ChatterBotCorpusTrainer
 
 
 def create_bot():
-    return ChatBot(name='RevolveBot', read_only=True,
+    return ChatBot(name='RevolveBot', read_only=False,
                    logic_adapters=['chatterbot.logic.MathematicalEvaluation', 'chatterbot.logic.BestMatch'])
 
 
@@ -13,10 +13,9 @@ def train(bot):
                     'hi there!',
                     'hi!',
                     'how do you do?',
-                    'how are you?',
                     'i\'m cool.',
-                    'fine, you?',
-                    'always cool.',
+                    'how are you?',
+                    'I\'m doing okay, you?',
                     'i\'m ok',
                     'glad to hear that.',
                     'i\'m fine',
@@ -29,7 +28,7 @@ def train(bot):
                     'Goodbye',
                     'what\'s your name?',
                     'I\'m RevolveBot. ask me any question',
-                    'I love ...',
+                    'I love ',
                     'I love her too!'                    
                   ]
     small_talk_trainer = ListTrainer(bot)    
@@ -40,4 +39,4 @@ def train(bot):
 def serious_train(bot):
     corpus_trainer = ChatterBotCorpusTrainer(bot)
     corpus_trainer.train('chatterbot.corpus.english')
-
+    

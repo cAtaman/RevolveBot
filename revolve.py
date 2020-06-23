@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import request, jsonify, render_template
 from config import revolve_bot, app
 from termcolor import colored
+import platform
 
 
 @app.route('/chat', methods=['GET', 'POST'])
@@ -20,5 +21,8 @@ def get_bot_playground():
 
 
 if __name__ == '__main__':
+    if platform.uname().system == 'Windows':
+        from colorama import init
+        init()
     app.run(debug=True, port=3310)
 
