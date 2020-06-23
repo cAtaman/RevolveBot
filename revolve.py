@@ -24,5 +24,5 @@ if __name__ == '__main__':
     if platform.uname().system == 'Windows':
         from colorama import init
         init()
-    app.run(debug=True, port=3310)
+    app.run(debug=True, port=8000)
 
